@@ -1,34 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.css';
+import api from './services/api';
+
 
 function App() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+
+
+
+  api.post(`${api}/auth/login`, {'mail':mail,'password':password})
+    .then((response) => {
+      console.log(response)
+      return response.data
+    })
+
   return (
     <div className="container">
       <div className="container-login">
         <div className="wrap-login">
           <form className="login-form">
-            <span className="login-form-title">Entre com sua conta</span>
+            <span className="login-form-title">Post Request</span>
 
             <div className="wrap-input">
               <input 
-                className={email !== "" ? 'has-val input' : 'input'} 
+                className="input" 
                 type="email" 
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                onclick={mail}                       
               />
-
               <span className="focus-input" data-placeholder="Email"></span>
-
             </div>
 
             <div className="wrap-input">
               <input 
-                className={password !== "" ? 'has-val input' : 'input'} 
-                type="password" 
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                className="input"
+                type="password"
+                onclick={password}
               />
               <span className="focus-input" data-placeholder="Password"></span>
             </div>
